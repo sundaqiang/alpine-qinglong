@@ -9,7 +9,7 @@
     
     No password
     
-- ## virt-install
+- ## virt-install(pve or esxi)
 ```sh
 ash -c "$(wget https://raw.githubusercontent.com/sundaqiang/alpine-qinglong/main/virt-install.sh -q -O -)"
 ```
