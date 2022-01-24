@@ -60,7 +60,8 @@ git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
 && chmod 777 ${QL_DIR}/docker/*.sh \
 && npm install -g pnpm \
 && pnpm install -g pm2 \
-&& pnpm install -g ts-node typescript tslib \
+&& pnpm install -g ts-node typescript tslib date-fns axios ts-node typescript png-js crypto-js md5 ts-md5 tslib @types/node tough-cookie jsdom tunnel fs ws js-base64 got \
+&& pnpm install ts-node typescript tslib date-fns axios ts-node typescript png-js crypto-js md5 ts-md5 tslib @types/node tough-cookie jsdom tunnel fs ws js-base64 got \
 && rm -rf /root/.npm \
 && pnpm install --prod \
 && rm -rf /root/.pnpm-store \
@@ -69,13 +70,20 @@ git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
 && rm -rf /static
 
 #配置启动项
-echo 'cd /ql' > /etc/local.d/QL.start \
+echo '#!/bin/bash' > /etc/local.d/QL.start \
+&& echo '# https://github.com/sundaqiang/alpine-qinglong' >> /etc/local.d/QL.start \
+&& echo '' >> /etc/local.d/QL.start \
+&& echo 'export LANG=UTF-8' >> /etc/local.d/QL.start \
+&& echo 'export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' >> /etc/local.d/QL.start \
+&& echo 'export SHELL=/bin/bash' >> /etc/local.d/QL.start \
+&& echo 'export PS1="\u@\h:\w \$ "' >> /etc/local.d/QL.start \
+&& echo 'cd /ql' >> /etc/local.d/QL.start \
 && echo 'rm -rf /var/cache/apk/*' >> /etc/local.d/QL.start \
 && echo 'rm -rf /root/.npm' >> /etc/local.d/QL.start \
-&& echo 'rm -rf /root/.pnpm-store' >> /etc/local.d/QL.start \
 && echo 'rm -rf /root/.cache' >> /etc/local.d/QL.start \
+&& echo 'rm -rf /root/.pnpm-store' >> /etc/local.d/QL.start \
 && echo 'rm -rf /usr/x86_64-alpine-linux-musl' >> /etc/local.d/QL.start \
-&& echo './docker/docker-entrypoint.sh &' >> /etc/local.d/QL.start
+&& echo 'nohup ./docker/docker-entrypoint.sh &' >> /etc/local.d/QL.start
 chmod +x /etc/local.d/QL.start
 rc-update add local
 
