@@ -56,7 +56,6 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && pnpm install -g pm2 \
 && pnpm install -g ts-node typescript tslib \
 && cd / && pnpm install --prod \
-&& apk --purge del python2 g++ make \
 && rm -rf /root/.npm \
 && rm -rf /root/.pnpm-store \
 && rm -rf /root/.cache \
@@ -80,6 +79,7 @@ git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
 && rm -rf /root/.npm \
 && rm -rf /root/.pnpm-store \
 && rm -rf /root/.cache \
+&& apk --purge del python2 g++ make \
 && git clone -b ${QL_BRANCH} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
 && cp -rf /static/* ${QL_DIR} \
 && rm -rf /static
