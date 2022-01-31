@@ -54,7 +54,7 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && git config --global user.name "qinglong" \
 && npm install -g pnpm \
 && pnpm install -g pm2 \
-&& pnpm install -g ts-node typescript tslib \
+&& pnpm install -g ts-node typescript tslib @types/node \
 && cd / && pnpm install --prod \
 && rm -rf /root/.npm \
 && rm -rf /root/.pnpm-store \
