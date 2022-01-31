@@ -1,6 +1,12 @@
 #!/bin/ash
 # https://github.com/sundaqiang/alpine-qinglong
 
+#初始化
+export LANG=UTF-8
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export SHELL=/bin/bash
+export PS1="\u@\h:\w \$ "
+
 #开启ssh、替换为bash
 sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config \
 && sed -i 's/root:x:0:0:root:\/root:\/bin\/ash/root:x:0:0:root:\/root:\/bin\/bash/g' /etc/passwd \
@@ -43,7 +49,18 @@ pip config set global.index-url http://mirrors.aliyun.com/pypi/simple/ \
 #其他设置
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && echo "Asia/Shanghai" > /etc/timezone \
-&& touch ~/.bashrc
+&& touch ~/.bashrc \
+&& git config --global user.email "qinglong@@users.noreply.github.com" \
+&& git config --global user.name "qinglong" \
+&& npm install -g pnpm \
+&& pnpm install -g pm2 \
+&& pnpm install -g ts-node typescript tslib \
+&& cd / && pnpm install --prod \
+&& apk --purge del python2 g++ make \
+&& rm -rf /root/.npm \
+&& rm -rf /root/.pnpm-store \
+&& rm -rf /root/.cache \
+&& rm -f /package.json
 
 #安装qinglong
 QL_MAINTAINER="whyour"
@@ -52,19 +69,17 @@ QL_BRANCH=master
 QL_DIR=/ql
 rm -rf ${QL_DIR}
 git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
-&& git config --global user.email "qinglong@@users.noreply.github.com" \
-&& git config --global user.name "qinglong" \
 && cd ${QL_DIR} \
 && cp -f .env.example .env \
 && chmod 777 ${QL_DIR}/shell/*.sh \
 && chmod 777 ${QL_DIR}/docker/*.sh \
-&& npm install -g pnpm \
-&& pnpm install -g pm2 \
-&& pnpm install -g ts-node typescript tslib date-fns axios ts-node typescript png-js crypto-js md5 ts-md5 tslib @types/node tough-cookie jsdom tunnel fs ws js-base64 got \
+&& cp -rf /node_modules ./ \
+&& rm -rf /node_modules \
+&& pnpm install --prod \
 && pnpm install ts-node typescript tslib date-fns axios ts-node typescript png-js crypto-js md5 ts-md5 tslib @types/node tough-cookie jsdom tunnel fs ws js-base64 got \
 && rm -rf /root/.npm \
-&& pnpm install --prod \
 && rm -rf /root/.pnpm-store \
+&& rm -rf /root/.cache \
 && git clone -b ${QL_BRANCH} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
 && cp -rf /static/* ${QL_DIR} \
 && rm -rf /static
@@ -82,7 +97,6 @@ echo '#!/bin/bash' > /etc/local.d/QL.start \
 && echo 'rm -rf /root/.npm' >> /etc/local.d/QL.start \
 && echo 'rm -rf /root/.cache' >> /etc/local.d/QL.start \
 && echo 'rm -rf /root/.pnpm-store' >> /etc/local.d/QL.start \
-&& echo 'rm -rf /usr/x86_64-alpine-linux-musl' >> /etc/local.d/QL.start \
 && echo 'nohup ./docker/docker-entrypoint.sh &' >> /etc/local.d/QL.start
 chmod +x /etc/local.d/QL.start
 rc-update add local
