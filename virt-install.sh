@@ -21,24 +21,24 @@ sed -i '2,$d' /etc/apk/repositories \
 apk update -f \
 && apk upgrade \
 && apk --no-cache add -f bash \
-						 coreutils \
-						 moreutils \
-						 git \
-						 curl \
-						 wget \
-						 tzdata \
-						 perl \
-						 openssl \
-						 nginx \
-						 nodejs \
-						 npm \
-						 python3 \
-						 jq \
-						 openssh \
-						 py3-pip \
-						 python2 \
-						 g++ \
-						 make
+			coreutils \
+			moreutils \
+			git \
+			curl \
+			wget \
+			tzdata \
+			perl \
+			openssl \
+			nginx \
+			nodejs \
+			npm \
+			python3 \
+			jq \
+			openssh \
+			py3-pip \
+			python2 \
+			g++ \
+			make
 rm -rf /var/cache/apk/*
 
 #修改npm和pip镜像源
@@ -76,6 +76,10 @@ git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
 && rm -rf /node_modules \
 && pnpm install --prod \
 && pnpm install ts-node typescript tslib date-fns axios ts-node typescript png-js crypto-js md5 ts-md5 tslib @types/node tough-cookie jsdom tunnel fs ws js-base64 got \
+&& pip3 install requests \
+&& pip3 install download \
+&& pip3 install canvas \
+&& pip3 install telethon \
 && rm -rf /root/.npm \
 && rm -rf /root/.pnpm-store \
 && rm -rf /root/.cache \
