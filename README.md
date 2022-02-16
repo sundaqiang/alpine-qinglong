@@ -1,9 +1,9 @@
 # alpine-qinglong
 
 - ## pve-backup
-    链接：https://cowtransfer.com/s/1f771efeb3b748
+    链接：https://cowtransfer.com/s/93bf24227f8e42
     
-    口令：doz3gh
+    口令：1w0r0b
     
     user：root
     
