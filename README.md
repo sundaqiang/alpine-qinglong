@@ -7,7 +7,7 @@
     
     user：root
     
-    No password
+    password:Alpine
     
 - ## virt-install(pve or esxi)
 ```sh
