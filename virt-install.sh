@@ -85,7 +85,8 @@ git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
 && rm -rf /root/.cache \
 && apk --purge del python2 g++ make \
 && git clone -b ${QL_BRANCH} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
-&& cp -rf /static/* ${QL_DIR} \
+&& mkdir -p ${QL_DIR}/static \
+&& cp -rf /static/* ${QL_DIR}/static \
 && rm -rf /static
 
 #配置启动项
