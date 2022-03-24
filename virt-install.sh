@@ -6,6 +6,7 @@ export LANG=UTF-8
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export SHELL=/bin/bash
 export PS1="\u@\h:\w \$ "
+export QL_DIR=/ql
 
 #开启ssh、替换为bash
 sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config \
