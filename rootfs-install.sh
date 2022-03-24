@@ -7,6 +7,7 @@ export LANG=UTF-8
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export SHELL=/bin/bash
 export PS1="\u@\h:\w \$ "
+export QL_DIR=/ql
 
 #修改默认源
 sed -i '2,$d' /etc/apk/repositories \
@@ -81,7 +82,8 @@ git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
 && rm -rf /root/.cache \
 && apk --purge del python2 g++ make \
 && git clone -b ${QL_BRANCH} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
-&& cp -rf /static/* ${QL_DIR} \
+&& mkdir -p ${QL_DIR}/static \
+&& cp -rf /static/* ${QL_DIR}/static \
 && rm -rf /static
 
 #配置启动项
