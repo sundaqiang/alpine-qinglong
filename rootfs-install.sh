@@ -94,6 +94,7 @@ echo '#!/bin/bash' > /start.sh \
 && echo 'export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' >> /start.sh \
 && echo 'export SHELL=/bin/bash' >> /start.sh \
 && echo 'export PS1="\u@\h:\w \$ "' >> /start.sh \
+&& echo 'export QL_DIR=/ql' >> /start.sh \
 && echo 'cd /ql' >> /start.sh \
 && echo 'rm -rf /var/cache/apk/*' >> /start.sh \
 && echo 'rm -rf /root/.npm' >> /start.sh \
