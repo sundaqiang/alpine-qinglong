@@ -98,6 +98,7 @@ echo '#!/bin/bash' > /etc/local.d/QL.start \
 && echo 'export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' >> /etc/local.d/QL.start \
 && echo 'export SHELL=/bin/bash' >> /etc/local.d/QL.start \
 && echo 'export PS1="\u@\h:\w \$ "' >> /etc/local.d/QL.start \
+&& echo 'export QL_DIR=/ql' >> /etc/local.d/QL.start \
 && echo 'cd /ql' >> /etc/local.d/QL.start \
 && echo 'rm -rf /var/cache/apk/*' >> /etc/local.d/QL.start \
 && echo 'rm -rf /root/.npm' >> /etc/local.d/QL.start \
