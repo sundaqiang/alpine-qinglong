@@ -53,19 +53,18 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 && touch ~/.bashrc \
 && git config --global user.email "qinglong@@users.noreply.github.com" \
 && git config --global user.name "qinglong" \
+&& git config --global http.postBuffer 524288000 \
 && npm install -g pnpm \
-&& pnpm install -g pm2 \
-&& pnpm install -g ts-node typescript tslib @types/node \
+&& pnpm add -g pm2 ts-node typescript tslib \
 && cd / && pnpm install --prod \
 && rm -rf /root/.npm \
 && rm -rf /root/.pnpm-store \
-&& rm -rf /root/.cache \
-&& rm -f /package.json
+&& rm -rf /root/.cache
 
 #安装qinglong
 QL_MAINTAINER="whyour"
 QL_URL=https://github.com/${QL_MAINTAINER}/qinglong.git
-QL_BRANCH=master
+QL_BRANCH=develop
 QL_DIR=/ql
 rm -rf ${QL_DIR}
 git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
